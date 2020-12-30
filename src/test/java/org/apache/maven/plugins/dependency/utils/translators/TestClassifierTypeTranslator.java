@@ -25,8 +25,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.factory.ArtifactFactory;
-import org.apache.maven.artifact.factory.DefaultArtifactFactory;
 import org.apache.maven.artifact.handler.manager.ArtifactHandlerManager;
 import org.apache.maven.artifact.handler.manager.DefaultArtifactHandlerManager;
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -48,8 +46,6 @@ public class TestClassifierTypeTranslator
 {
     Set<Artifact> artifacts = new HashSet<>();
 
-    ArtifactFactory artifactFactory;
-
     ArtifactRepository artifactRepository;
 
     Log log = new SilentLog();
@@ -64,9 +60,6 @@ public class TestClassifierTypeTranslator
 
         artifactHandlerManager = new DefaultArtifactHandlerManager();
         this.setVariableValueToObject( artifactHandlerManager, "artifactHandlers", new HashMap<>() );
-
-        artifactFactory = new DefaultArtifactFactory();
-        this.setVariableValueToObject( artifactFactory, "artifactHandlerManager", artifactHandlerManager );
 
         artifactRepository = new StubArtifactRepository( null );
 
