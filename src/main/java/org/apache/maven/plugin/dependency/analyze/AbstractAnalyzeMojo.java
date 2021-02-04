@@ -348,20 +348,23 @@ public abstract class AbstractAnalyzeMojo
             reported = true;
         }
 
+        String pomFilePath = "Pom File: " + project.getBasedir() + File.separator + "pom.xml";
+
         if ( !usedUndeclared.isEmpty() )
         {
-            getLog().warn( "Used undeclared dependencies found:" );
-
-            logArtifacts( usedUndeclared, true );
+            getLog().warn( "Used undeclared dependencies found for:" + project.getName() );
+            String prefix = "Used undeclared%%" + pomFilePath + "%%" ;
+            logArtifacts( usedUndeclared, true, prefix );
             reported = true;
             warning = true;
         }
 
         if ( !unusedDeclared.isEmpty() )
         {
-            getLog().warn( "Unused declared dependencies found:" );
+            getLog().warn( "Unused declared dependencies found for:" + project.getName() );
+            String prefix = "Unused declared%%" + pomFilePath + "%%";
 
-            logArtifacts( unusedDeclared, true );
+            logArtifacts( unusedDeclared, true, prefix );
             reported = true;
             warning = true;
         }
@@ -402,6 +405,11 @@ public abstract class AbstractAnalyzeMojo
 
     private void logArtifacts( Set<Artifact> artifacts, boolean warn )
     {
+        logArtifacts( artifacts, warn, "" );
+    }
+
+    private void logArtifacts( Set<Artifact> artifacts, boolean warn, String prefix )
+    {
         if ( artifacts.isEmpty() )
         {
             getLog().info( "   None" );
@@ -415,11 +423,11 @@ public abstract class AbstractAnalyzeMojo
 
                 if ( warn )
                 {
-                    getLog().warn( "   " + artifact );
+                    getLog().warn( "   " + prefix + artifact );
                 }
                 else
                 {
-                    getLog().info( "   " + artifact );
+                    getLog().info( "   " + prefix + artifact );
                 }
 
             }

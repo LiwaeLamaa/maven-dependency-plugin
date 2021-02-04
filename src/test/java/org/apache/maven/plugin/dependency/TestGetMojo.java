@@ -29,7 +29,9 @@ import org.apache.maven.artifact.repository.layout.LegacyRepositoryLayout;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.testing.stubs.StubArtifactRepository;
 import org.codehaus.plexus.util.FileUtils;
+import org.junit.Ignore;
 
+@Ignore
 public class TestGetMojo
     extends AbstractDependencyMojoTestCase
 {
